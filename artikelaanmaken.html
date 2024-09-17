@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    </head>
+    <body>
+        <script>
+            function deDOMLezen() {
+                let deDOM = document.getElementsByTagName("html");
+                console.log(deDOM);
+            }
+
+            function inleveren() {
+                let titel = document.getElementById("titelinvoer").value;
+                let auteur = document.getElementById("auteurinvoer").value;
+                let categorie =
+                    document.getElementById("categorieinvoer").value;
+
+                console.log(titel, auteur, categorie);
+                fetch(
+                    // voor het toevoegen kan je aan de url: /titel/auteur/categorie toevoegen
+                    `https://krantenapp-dkd4a9b9a7a0fpfe.westeurope-01.azurewebsites.net/artikeltoevoegen/${titel}/${auteur}/${categorie}`
+                );
+            }
+            let voortgang = 0;
+            function barvollopen(){
+                voortgang += 10;
+                const deprogressbar = document.getElementById("magjezelfverzinnen");
+                deprogressbar.style.width = voortgang+'%';
+            }
+            function automatisch(){
+                setInterval(barvollopen, 1000);
+            }
+        </script>
+        <button onclick="deDOMlezen()" class="btn btn-primary">toon mij de DOM</button><br />
+        <h1>artikel aanmaken</h1>
+        <br />
+        <a href="krantenapp.html" class="btn btn-primary">home</a>
+        <div class="spinner-border"></div>
+
+
+        <div class="progress">
+            <div class="progress-bar" style="width:0%" id="magjezelfverzinnen"></div>
+          </div>
+          <button class="btn btn-primary" onclick="barvollopen()">Laat Bar Vollopen</button>
+          <button class="btn btn-primary" onclick="automatisch()">Automatisch</button>
+        
+        
+        
+        
+        
+          title
+        <input type="text" id="titelinvoer" class="form-control"/>
+        <br />
+        categorie
+        <select id="categorieinvoer" class="form-control">
+            <option value="sport">sport</option>
+            <option value="actueel">actueel</option>
+            <option value="sport">financieel</option>
+        </select>
+        <br />
+        auteur
+        <input type="text" id="auteurinvoer" class="form-control"/>
+        <br />
+        <button onclick="inleveren()" class="btn btn-success">inleveren</button>
+    </body>
+</html>

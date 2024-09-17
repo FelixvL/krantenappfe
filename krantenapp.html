@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+        <title>Document</title>
+        <style>
+            .artikelen-wrapper {
+                display: flex;
+            }
+            .artikelen {
+                border: 2px solid red;
+                flex-direction: row;
+            }
+            body{
+                color:white;
+                background-color: black;
+            }
+            .btn-primary{
+                background-color: red;
+            }
+        </style>
+        <script>
+            window.onload = ophalenartikelen;
+            function ophalenartikelen() {
+                fetch(
+                    "https://krantenapp-dkd4a9b9a7a0fpfe.westeurope-01.azurewebsites.net/alleartikelen/"
+                )
+                    .then((r) => r.json())
+                    .then((data) => maken_tabel_met_artikelen(data));
+            }
+            function maken_tabel_met_artikelen(alleartikelen) {
+                let eindString = `<table class="table table-dark table-hover">`;
+                eindString += `<tr><th>auteur</th><th>titel</th><th>categorie</th></tr>`;
+                
+                for (let i = 0; i < alleartikelen.length; i++) {
+                    eindString += `<tr>
+                        <td>${alleartikelen[i].auteur}</td>
+                        <td>${alleartikelen[i].titel}</td>
+                        <td>${alleartikelen[i].categorie}</td>
+                    </tr>`;
+                }
+                
+                eindString += "</table>";
+                document.getElementById("artikelen").innerHTML = eindString;
+            }
+        </script>
+    </head>
+    <body>
+        <div class="row">
+            <div class="col-sm-1">
+            </div>
+
+            <div class="col-sm-10">
+                <h1>Leeuwarder Courant</h1>
+                <div class="artikelen-wrapper">
+                    <div class="artikelen">hoi</div>
+                    <div class="artikelen">doei</div>
+                </div>
+                <a href="artikelaanmaken.html" class="btn btn-primary">artikel aanmaken</a>
+                <div id="artikelen"></div>
+            </div>
+ 
+            <div class="col-sm-1">                
+            </div>
+        </div> 
+    </body>
+</html>
