@@ -1,0 +1,24 @@
+<html>
+    <script>
+        function toevoegenmetpost(){
+            let artikel = {};
+            artikel.inhoud = document.getElementById("inhoudartikel").value;
+            artikel.titel = "Kat gevonden in park";
+            artikel.categorie = "binnenland";
+            artikel.foto = "https://falconapi.nl:8371/images/6dec8729-a33c-4929-a88a-0f5d2c2f6b24.jpg";
+            artikel.auteur = "billy de schrijver";
+            console.log(artikel);
+            let artikelJSON = JSON.stringify(artikel);
+            fetch ('https://krantenapp-dkd4a9b9a7a0fpfe.westeurope-01.azurewebsites.net/heelartikeltoevoegen', {
+                    headers: {
+                    'Content-type': 'application/json'
+                },
+                method: 'POST',
+                body: artikelJSON
+            });
+
+        }
+    </script>
+    <input id="inhoudartikel">
+    <button onclick="toevoegenmetpost()">Klik hier</button>
+</html>
