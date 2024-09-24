@@ -23,6 +23,10 @@
             }
         </style>
         <script>
+            function ganaarartikel(artikelnummer){
+                //alert(artikelnummer);
+                window.location = "artikeldetails.html?aid="+artikelnummer;
+            }
             window.onload = ophalenartikelen;
             function ophalenartikelen() {
                 fetch(
@@ -36,7 +40,7 @@
                 eindString += `<tr><th>auteur</th><th>titel</th><th>categorie</th></tr>`;
                 
                 for (let i = 0; i < alleartikelen.length; i++) {
-                    eindString += `<tr>
+                    eindString += `<tr onclick="ganaarartikel(${alleartikelen[i].id})">
                         <td>${alleartikelen[i].auteur}</td>
                         <td>${alleartikelen[i].titel}</td>
                         <td>${alleartikelen[i].categorie}</td>
@@ -60,6 +64,7 @@
                     <div class="artikelen">doei</div>
                 </div>
                 <a href="artikelaanmaken.html" class="btn btn-primary">artikel aanmaken</a>
+                <a href="artikelaanmakencompleet.html" class="btn btn-primary">artikel aanmaken compleet post</a>
                 <div id="artikelen"></div>
             </div>
  
